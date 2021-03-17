@@ -5,6 +5,7 @@ import pytest
 from operators.leaf import Leaf
 from operators.add import Add
 from operators.sub import Sub
+from operators.div import Div
 
 
 @pytest.mark.timeout(1.0)
@@ -22,4 +23,10 @@ def test_addition_adds_when_given_leaves_with_numbers():
 @pytest.mark.timeout(1.0)
 def test_subtract_subtracts_when_given_leaves_with_numbers():
     """."""
-    assert Sub(Leaf(5), Leaf(6)).apply() == -1
+    assert Sub(Sub(Sub(Sub(Leaf(6), Leaf(6)), Leaf(6)), Leaf(6)), Leaf(6)).apply() == -18
+
+
+@pytest.mark.timeout(1.0)
+def test_divide_divides_when_given_leaves_with_numbers():
+    """."""
+    assert Div(Div(Div(Div(Leaf(6), Leaf(6)), Leaf(6)), Leaf(6)), Leaf(6)).apply() == 0
