@@ -9,6 +9,13 @@ from operators.sub import Sub
 
 
 @pytest.mark.timeout(1.0)
+def test_no_apply():
+    """."""
+    assert Add(Add(Leaf(5), Leaf(6)), Add(Leaf(5), Leaf(6))).class_str() \
+           == "Add(Add(Leaf(5), Leaf(6)), Add(Leaf(5), Leaf(6)))"
+
+
+@pytest.mark.timeout(1.0)
 def test_leaf_to_class_string1():
     """."""
     assert Add(Leaf(5), Leaf(6)).class_str() == "Add(Leaf(5), Leaf(6))"
@@ -19,7 +26,7 @@ def test_leaf_to_class_string2():
     """."""
     print(Leaf(6).class_str())
     print(eval(Leaf(6).class_str()))
-    print("the!!;", eval(Leaf(6).class_str()).apply())
+    print(eval(Leaf(6).class_str()).apply())
     assert eval(Leaf(6).class_str()).apply() == 6
 
 

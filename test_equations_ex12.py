@@ -9,6 +9,12 @@ from operators.div import Div
 
 
 @pytest.mark.timeout(1.0)
+def test_divide_divides_when_given_leaves_with_numbers():
+    """."""
+    assert Div(Leaf(30), Leaf(6)).apply() == 5
+
+
+@pytest.mark.timeout(1.0)
 def test_leaf_apply_yields_number_when_given_a_number():
     """."""
     assert Leaf(6).apply() == 6

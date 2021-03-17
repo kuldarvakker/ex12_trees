@@ -13,6 +13,12 @@ from operators.xor import Xor
 
 
 @pytest.mark.timeout(1.0)
+def test_subtract_subtracts_when_given_subtraction():
+    """."""
+    assert Sub(Sub(Leaf(5), Leaf(6)), Sub(Leaf(5), Leaf(6))).apply() == 0
+
+
+@pytest.mark.timeout(1.0)
 def test_xor_bitwise_xor_when_given_logical_xor():
     """."""
     assert Xor(Xor(Leaf(500), Leaf(5)), Xor(Leaf(20), Leaf(4))).apply() == 481
