@@ -29,7 +29,6 @@ class Operator(TreeNode):
         Override this property for operations where the given operation is not associative.
         """
         return True
-        #  Sulgude tegemiseks ülemine
 
     @property
     @abstractmethod
