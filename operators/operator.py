@@ -1,5 +1,4 @@
 """."""
-
 from abc import abstractmethod
 from tree_node import TreeNode
 
@@ -9,43 +8,28 @@ class Operator(TreeNode):
 
     def __init__(self, *args):
         """Store the given arguments somehow."""
-        super().__init__(*args)
+        super().__init__(*args[0])
+        self.__value = args[0]  # Usually tuple of 2 elements
 
     def apply(self):
         """Make use of the *args to compute the value of the given subtree. Recursion is your friend."""
-        return -1
-
-    def class_str(self):
-        """:return class string representation of the object."""
-        return "Add(Leaf(5), Leaf(6))"
-
-    def __str__(self):
-        """:return the mathematical string representation of the tree with least amount of parenthesis."""
-        return "5 + 6"
+        params = [x.apply() for x in self.__value]
+        types = tuple(type(x) for x in params)
+        if self.actions.get(types):
+            return self.actions[types](*params)
+        else:
+            return self.default_operator(*[x.apply() for x in self.__value])
 
     @property
     def associativity(self):
-        """abstract method witch should be overridden to return a boolean when the node is not associative."""
-        return False
-
-    @property
-    @abstractmethod
-    def default_operator(self):
-        """abstract method which should be overridden to return the default_operator object."""
-        pass
-
-    @property
-    @abstractmethod
-    def priority(self):
         """
-        abstract method witch should be overridden to return priority of the node.
-
         Boolean whether the operation is associative or not.
+
         For example addition is associative but subtraction is not.
         Override this property for operations where the given operation is not associative.
-        Visit: https://en.wikipedia.org/wiki/Order_of_operations
         """
-        pass
+        return True
+        #  Sulgude tegemiseks ülemine
 
     @property
     @abstractmethod
